@@ -15,16 +15,11 @@
   <title>Tu Sitio Web - Home</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar- bg-warning">
-    <div class="container">
-      <a class="navbar-brand text-black" href="#">Tu Sitio Web</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+   <nav class="navbar navbar-expand-lg navbar- bg-light">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active text-black" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link active text-black" aria-current="page" href="{{route('home.index')}}">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-black" href="{{route('cuentas.index')}}">Cuentas</a>
@@ -33,12 +28,12 @@
             <a class="nav-link text-black" href="{{route('perfiles.index')}}">Perfiles</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-black" href="{{route('fotos.store')}}">Artista</a>
+            <a class="nav-link text-black" href="{{route('imagenes.create')}}">Artista</a>
           </li>
         </ul>
       </div>
-    </div>
   </nav>
+
 
   
 
@@ -59,8 +54,8 @@
             <img src="imagen-servicio-1.jpg" class="card-img-top" alt="Imagen del Servicio 1">
             <div class="card-body">
               <h5 class="card-title">Fotografias</h5>
-              <p class="card-text">Aqui podras ver todas las fotografias de tus artistas favoritos, click en Ver Fotografias para acceder :).</p>
-              <a href="{{route('fotos.index')}}" class="btn btn-dark">Ver Fotografias</a>
+              <p class="card-text">Aqui podras ver todas las fotografias de tus artistas favoritos :).</p>
+              <a href="{{route('imagenes.index')}}" class="btn btn-dark">Ver Fotografias</a>
             </div>
           </div>
         </div>
@@ -71,3 +66,8 @@
               <h5 class="card-title">Cuentas</h5>
               <p class="card-text">Ya tienes cuenta o quieres crearte una?, click en Ver cuenta para acceder.</p>
               <a href="#" class="btn btn-dark">Ver Cuenta
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>

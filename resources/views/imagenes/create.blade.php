@@ -3,7 +3,7 @@
 <head>
     <title>Subir imágenes</title>
     <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
             background-image: url('images/guns-n-roses-estadio-nacionaljpg.jpg');
@@ -20,32 +20,30 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Subir imágenes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Galería</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar- bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active text-black" aria-current="page" href="{{route('home.index')}}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-black" href="{{route('cuentas.index')}}">Cuentas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-black" href="{{route('perfiles.index')}}">Perfiles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-black" href="{{route('imagenes.create')}}">Artista</a>
+          </li>
+        </ul>
+      </div>
+  </nav>
 
     <div class="container">
         <div class="card card-center">
             <div class="card-body">
                 <h1 class="card-title">Subir imágenes</h1>
-                <form method="POST" action="{{route('fotos.store')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('imagenes.store')}}" enctype="multipart/form-data">
                     @csrf
         
                     <div class="mb-3">

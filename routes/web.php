@@ -27,4 +27,6 @@ Route::resource('/perfiles',PerfilesController::class)->parameters('perfiles','p
 
 Route::resource('/cuentas',CuentasController::class)->parameters('cuentas','cuenta');
 
-Route::resource('/fotos',FotosController::class)->parameters('fotos','foto');
+Route::resource('/imagenes',FotosController::class)->parameters([
+    'imagenes' => 'imagen'
+]);
