@@ -6,8 +6,18 @@ use Illuminate\Http\Request;
 
 
 class HomeController extends Controller
-{
+{   
+    public function __construct(){
+        $this->middleware('auth')->except(['login','index']);
+    }
+
     public function index(){
         return view('home.index');
     }
+
+    
+    public function login(){
+        return view('home.login');
+    }
+
 }

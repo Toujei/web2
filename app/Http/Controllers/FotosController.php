@@ -6,25 +6,33 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Imagen;
 use App\Models\Cuenta;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class FotosController extends Controller
 {
     public function index(){
         $artistas = Cuenta::where('perfil_id', 2)->orderBy('user')->get(); 
-        $imagenes = Imagen::orderBy('id')->get();
+        $imagenes = Imagen::where('baneada', 1)->orderBy('id')->get();
         return view('imagenes.index',compact(['imagenes','artistas']));
     }
 
+    public function __construct(){
+        $this->middleware('auth')->except(['index']);
+    }
+
+
     public function create(){
         $imagenes = Imagen::orderBy('id')->get();
-        return view('imagenes.create',compact('imagenes'));
+        $artistas = Cuenta::orderBy('user')->get();
+        return view('imagenes.create',compact('imagenes','artistas'));
     }
 
     public function store(Request $request)
     {
         $imagen = new Imagen();
-    
+        $cuenta = Auth::user();
         $foto = $request->file('imagen');
         $arch = $foto->getClientOriginalName();
     
@@ -37,7 +45,7 @@ class FotosController extends Controller
         $imagen->archivo = $rutaarch;
         $imagen->baneada = false;
         $imagen->motivo_ban = null;
-        $imagen->cuenta_user = $request->cuenta_user;
+        $imagen->cuenta_user = $cuenta->user;
     
         $imagen->save();
     

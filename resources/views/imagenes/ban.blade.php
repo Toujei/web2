@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Subir imágenes</title>
-    <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
             background-image: url('images/guns-n-roses-estadio-nacionaljpg.jpg');
@@ -64,30 +63,55 @@
       </div>
     </nav>
   </div>
+  <div class="modal fade" id="borrarModal{{$imagen->id}}" tabindex="-1" aria-labelledby="borrarModalLabel{{$imagen->id}}" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="borrarModalLabel{{$imagen->id}}">Consulta de seguridad</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="POST" action="{{route('imagenes.banear',$imagen->id)}}">
+                  @method('put')
+                  @csrf
+                  <div class="modal-body">
+                      ¿Banear la imagen <span class="text-danger fw-bold">{{$imagen->titulo}}</span>?
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-danger">Banear imagen</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
 
     <div class="container">
         <div class="card card-center">
             <div class="card-body">
-                <h1 class="card-title">Editar imagen</h1>
-                <form method="POST" action="{{route('imagenes.update', $imagen->id)}}">
+                <h1 class="card-title">Baneos</h1>
+                <form method="POST" action="{{route('imagenes.banear', $imagen->id)}}">
                     @method('put')
                     @csrf
                     <div class="mb-3">
-                        <label for="titulo" class="form-label">Titulo</label>
-                        <input type="text" id="titulo" name="titulo" class="form-control" value="{{$imagen->titulo}}">
+                        <label for="motivo_ban" class="form-label">Motivo ban</label>
+                        <input type="text" id="motivo_ban" name="motivo_ban" class="form-control">
                     </div>
-                    
 
+                    <div class="mb-3">
+                        <span>{{$imagen->titulo}}</span>
+                    </div>
 
-                    <button type="submit" class="btn btn-primary">Editar</button>
-                </form>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#borrarModal{{$imagen->id}}">Subir</button>
+               </form>
             </div>
         </div>
     </div>
 
    
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
 </body>
 </html>
