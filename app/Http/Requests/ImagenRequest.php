@@ -25,6 +25,7 @@ class ImagenRequest extends FormRequest
         return [
             'titulo' => 'required|max:20',
             'imagen' => 'required',
+            'motivo' => 'required',
         ];
     }
 
@@ -34,6 +35,7 @@ class ImagenRequest extends FormRequest
             'titulo.required' => 'indique un titulo porfavor',
             'titulo.max' => 'El titulo puede contener hasta 20 caracteres',
             'imagen.required' => 'Seleccione una foto por favoar',
+            'motivo.required' => 'Indique algun motivo',
         ];
     }
 }

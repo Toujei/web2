@@ -53,8 +53,8 @@
                   @if(Gate::allows('listado'))
                     <li><a class="dropdown-item text-black" href="{{ route('cuentas.create') }}">Crear cuentas</a></li>
                     <li><a class="dropdown-item text-black" href="{{ route('cuentas.index') }}">Cuentas</a></li>
-                    <li><a class="dropdown-item text-black" href="{{ route('imagenban.index') }}">Banear</a></li>
                   @endif
+                    <li><a class="dropdown-item text-black" href="{{ route('imagenban.index') }}">Banear</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>

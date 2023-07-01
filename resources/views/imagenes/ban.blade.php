@@ -5,7 +5,7 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-image: url('images/images.jpg');
+            background-image: url('{{asset("images/images.jpg")}}');
       
         }
 
@@ -49,9 +49,9 @@
                   <li><a class="dropdown-item text-black" href="{{ route('imagenes.create') }}">Tus fotos</a></li>
                   @if(Gate::allows('listado'))
                     <li><a class="dropdown-item text-black" href="{{ route('cuentas.create') }}">Crear cuentas</a></li>
-                    <li><a class="dropdown-item text-black" href="{{ route('cuentas.index') }}">Cuentas</a></li>
                     <li><a class="dropdown-item text-black" href="{{ route('imagenban.index') }}">Banear</a></li>
                   @endif
+                    <li><a class="dropdown-item text-black" href="{{ route('cuentas.index') }}">Cuentas</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -87,6 +87,7 @@
     </div>
 
     <div class="container">
+        
         <div class="card card-center">
             <div class="card-body">
                 <h1 class="card-title">Baneos</h1>
@@ -102,7 +103,7 @@
                         <span>{{$imagen->titulo}}</span>
                     </div>
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#borrarModal{{$imagen->id}}">Subir</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#borrarModal{{$imagen->id}}">Ban</button>
                </form>
             </div>
         </div>

@@ -72,7 +72,9 @@
         <th>Apellido</th>
         <th>Perfil</th>
         <th>Nro. Cuenta</th>
+        @if(Gate::allows('listado'))
         <th>Configuracion</th>
+        @endif
       </tr>
     </thead>
     <tbody>
@@ -84,6 +86,7 @@
         <td class="align-middle">{{ $cuenta->apellido}}</td>
         <td class="align-middle">{{ $cuenta->perfil->nombre}}</td>
         <td class="align-middle">{{ $list+1}}</td>
+        @if(Gate::allows('listado'))
         <td class="align-middle">
             <div class="modal fade" id="borrarModal{{$cuenta->user}}" tabindex="-1" aria-labelledby="borrarModalLabel{{$cuenta->user}}" aria-hidden="true">
                 <div class="modal-dialog">
@@ -115,7 +118,7 @@
             <a href="{{route('cuentas.edit',$cuenta->user)}}" class="btn btn-sm btn-dark" data-bs-toggle="tooltip" data-bs-title="Editar imagen">
                 <span class="material-icons">edit</span>
             </a>
-             
+            @endif 
           
         </td>
       </tr>

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Imagen;
 use App\Models\Cuenta;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\MotivoRequest;
+
 
 class FotosArtistaController extends Controller
 {
@@ -21,6 +23,7 @@ class FotosArtistaController extends Controller
     }
     
     public function banear(Request $request, Imagen $imagen){
+        
         $imagen->motivo_ban = $request->motivo_ban;
         $imagen->baneada = true;
         $imagen->save();
