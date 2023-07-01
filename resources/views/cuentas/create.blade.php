@@ -77,7 +77,9 @@
         <div class="alert alert-danger">
             <p>Error:</p>
             <ul>
-                <li>Ingrese un motivo</li>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
             </ul>
         </div>
       @endif
