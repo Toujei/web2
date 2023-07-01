@@ -34,9 +34,11 @@
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('imagenes.index') }}">Fotos</a>
             </li>
+            @if(Gate::allows('listado'))
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('perfiles.index') }}">Perfiles</a>
             </li>
+            @endif
             @if(auth()->check())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,9 +48,9 @@
                   <li><a class="dropdown-item text-black" href="{{ route('imagenes.create') }}">Tus fotos</a></li>
                   @if(Gate::allows('listado'))
                     <li><a class="dropdown-item text-black" href="{{ route('cuentas.create') }}">Crear cuentas</a></li>
-                    <li><a class="dropdown-item text-black" href="{{ route('cuentas.index') }}">Cuentas</a></li>
                     <li><a class="dropdown-item text-black" href="{{ route('imagenban.index') }}">Banear</a></li>
                   @endif
+                    <li><a class="dropdown-item text-black" href="{{ route('cuentas.index') }}">Cuentas</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -63,23 +65,12 @@
   </div>
 
 
-  
-
-  <header class="text-black text-center py-5">
-    <div class="container">
-      <h1 class="display-4 txt">Bienvenido a tu Sitio Web</h1>
-      <p class="lead">Aquí puedes agregar un eslogan o una breve descripción de tu sitio.</p>
-      <a href="#" class="btn btn-dark btn-lg">¡Empecemos!</a>
-    </div>
-  </header>
-
   <section class="py-5">
     <div class="container">
       
       <div class="row">
         <div class="col-md-6">
           <div class="card mb-6">
-            <img src="imagen-servicio-1.jpg" class="card-img-top" alt="Imagen del Servicio 1">
             <div class="card-body">
               <h5 class="card-title">Fotografias</h5>
               <p class="card-text">Aqui podras ver todas las fotografias de tus artistas favoritos :).</p>
@@ -89,7 +80,6 @@
         </div>
         <div class="col-md-6">
           <div class="card mb-6">
-            <img src="imagen-servicio-2.jpg" class="card-img-top" alt="Imagen del Servicio 2">
             <div class="card-body">
               <h5 class="card-title">Cuentas</h5>
               <p class="card-text">Ya tienes cuenta o quieres crearte una?, click en Ver cuenta para acceder.</p>

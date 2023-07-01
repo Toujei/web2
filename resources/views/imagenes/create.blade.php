@@ -36,9 +36,11 @@
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('imagenes.index') }}">Fotos</a>
             </li>
+            @if(Gate::allows('listado'))
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('perfiles.index') }}">Perfiles</a>
             </li>
+            @endif
             @if(auth()->check())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,19 +68,28 @@
 
     <div class="row">
         <div class="card col-3 mx-5">
-
-            <div class="card-body">
+                @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <p>Error:</p>
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+                @endif
+                <div class="card-body">
                 <h1 class="card-title">Sube tu imagen</h1>
                 <form method="POST" action="{{route('imagenes.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="titulo" class="form-label">titulo</label>
-                        <input type="text" id="titulo" name="titulo" class="form-control" value="{{old('titulo')}}">
+                        <input type="text" id="titulo" name="titulo" class="form-control  @error('titulo') is-invalid @enderror" value="{{old('titulo')}}">
                     </div>
 
                     <div class="form-group">
                         <label for="imagen">Selecciona una imagen:</label>
-                        <input type="file" class="form-control-file" id="imagen" name="imagen">
+                        <input type="file" class="form-control-file  @error('imagen') is-invalid @enderror" id="imagen" name="imagen">
                     </div>
 
                     <button type="submit" class="btn btn-dark mt-3">Subir</button>
@@ -86,6 +97,9 @@
                 
            </div>
         </div>
+              
+  
+              
 
         <div class="bg-white col-3 mx-5">
           <div class="bg-white">
@@ -94,6 +108,27 @@
             @foreach($artistas as $artista)       
               @if(Auth::user()->user == $artista->user)
                 @foreach($artista->imagenes as $imagen)
+                    <div class="modal fade" id="borrarModal{{$imagen->id}}" tabindex="-1" aria-labelledby="borrarModalLabel{{$imagen->id}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="borrarModalLabel{{$imagen->id}}">Consulta de seguridad</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST" action="{{route('imagenes.destroy',$imagen->id)}}">
+                                    @method('delete')
+                                    @csrf
+                                    <div class="modal-body">
+                                        ¿Borrar la imagen <span class="text-danger fw-bold">{{$imagen->titulo}}</span>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Borrar imagen</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
                     @if($imagen->baneada == 0)
                         <div class="col d-flex">
                             <div class="card flex-fill custom-card">
@@ -102,14 +137,10 @@
                                     <h5 class="card-title">{{ $imagen->titulo }}</h5>
                                 </div>
 
-                                <form method="POST" action="{{ route('imagenes.destroy', $imagen->id) }}">
-                                    @method('delete')
-                                    @csrf
-                                    <div class="footer">
-                                        <button type="submit" class="btn btn-danger mx-2">Borrar imagen</button>
-                                        <a href="{{ route('imagenes.edit', $imagen->id) }}" class="btn btn-dark btn mx-2">Editar imagen</a>
-                                    </div>
-                                </form>
+                                <div>
+                                  <a type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#borrarModal{{$imagen->id}}">Borrar imagen</a>
+                                  <a href="{{ route('imagenes.edit', $imagen->id) }}" class="btn btn-dark btn mx-2">Editar imagen</a>
+                               </div>
                             </div>
                         </div>
                     @endif
@@ -134,15 +165,10 @@
                                   <h5 class="card-title">{{ $imagen->titulo }}</h5>
                                   <h6 class="card-subtitle mb-2 text-body-secondary">Motivo: {{$imagen->motivo_ban}}</h6>
                               </div>
-
-                              <form method="POST" action="{{ route('imagenes.destroy', $imagen->id) }}">
-                                  @method('delete')
-                                  @csrf
-                                  <div class="footer">
-                                      <button type="submit" class="btn btn-danger mx-2">Borrar imagen</button>
-                                      <a href="{{ route('imagenes.edit', $imagen->id) }}" class="btn btn-dark btn mx-2">Editar imagen</a>
-                                  </div>
-                              </form>
+                              <div>
+                                  <a type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#borrarModal{{$imagen->id}}">Borrar imagen</a>
+                                  <a href="{{ route('imagenes.edit', $imagen->id) }}" class="btn btn-dark btn mx-2">Editar imagen</a>
+                               </div>
                           </div>
                       </div>
                   @endif

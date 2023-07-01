@@ -5,9 +5,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
     body {
-      background-image: url("images/guns-n-roses-estadio-nacional.jpg");
+      background-image: url('{{asset("images/tomar-las-mejores-fotografias.jpeg")}}');
       background-size: cover;
-      background-repeat: no-repeat;
+      
       background-position: center;
     }
   </style>
@@ -31,9 +31,11 @@
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('imagenes.index') }}">Fotos</a>
             </li>
+            @if(Gate::allows('listado'))
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('perfiles.index') }}">Perfiles</a>
             </li>
+            @endif
             @if(auth()->check())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,9 +62,7 @@
   </div>
 
 <div class="container">
-  <h1>Tabla de 3 columnas</h1>
-
-  <table class="table table-bordered table-striped table-hover table-light">
+  <table class="table table-bordered table-striped table-hover table-light mt-4">
     <thead>
       <tr>
         <th>ID</th>

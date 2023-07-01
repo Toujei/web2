@@ -33,6 +33,7 @@ Route::get('/imagenban',[FotosArtistaController::class,'index'])->name('imagenba
 Route::put('/imagenban/{imagen}',[FotosArtistaController::class,'unban'])->name('imagenban.unban');
 Route::get('/imagenes/{imagen}/ban',[FotosArtistaController::class,'ban'])->name('imagenes.ban');
 Route::put('/imagen/{imagen}',[FotosArtistaController::class,'banear'])->name('imagenes.banear');
+Route::get('/imagenes/all',[FotosController::class,'all'])->name('imagenes.all');
 
 
 Route::resource('/imagenes',FotosController::class)->parameters([

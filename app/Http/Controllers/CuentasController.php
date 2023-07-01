@@ -17,16 +17,14 @@ class CuentasController extends Controller
     }
 
     public function index(){
-        if(Gate::denies('listado')){
-            return redirect()->route('home.index');
-        }
-
+        
         $roles = Cuenta::orderBy('nombre')->get();
         $cuentas = Cuenta::orderBy('user')->get();
         return view('cuentas.index',compact('cuentas'));
     }
 
     public function create(){
+    
         $cuentas = Cuenta::orderBy('nombre')->get();
         return view('cuentas.create',compact('cuentas'));
     }
@@ -64,6 +62,9 @@ class CuentasController extends Controller
     }
 
     public function edit(Cuenta $cuenta){
+        if(Gate::denies('listado')){
+            return redirect()->route('home.index');
+        }
         return view('cuentas.edit',compact('cuenta'));
     }
 

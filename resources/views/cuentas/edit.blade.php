@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
     body {
-      background-image: url('{{asset("images/guns-n-roses-estadio-nacional.jpg") }}');
+      background-image: url('{{asset("images/9cc591c7f397c5c79e3f00f606bdb927--artist-monet-cloude-monet.jpg") }}');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -38,9 +38,11 @@
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('imagenes.index') }}">Fotos</a>
             </li>
+           @if(Gate::allows('listado'))
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('perfiles.index') }}">Perfiles</a>
             </li>
+            @endif
             @if(auth()->check())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,13 +83,14 @@
       <form method="POST" action="{{route('cuentas.update',$cuenta->user)}}">
           @method('put');
           @csrf
-          <div class="form-group">
-              <span>{{$cuenta->user}}</span>
-          </div>
+          <label  class="text-light text-bordered" for="cuenta">Cuenta</label>
 
+          <select type="text" id="cuenta" name="cuenta" class="form-control mt-3">
+              <option value=1>{{$cuenta->user}}</option>
+          </select>
           <div class="form-group">
               <label  class="text-light text-bordered" for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" class="form-control col-3 @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}">
+              <input type="text" id="nombre" name="nombre" class="form-control col-3 @error('nombre') is-invalid @enderror" value="{{$cuenta->nombre}}">
           </div>
 
           <div class="form-group">
@@ -120,6 +123,8 @@
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
 </body>
 </html>
 

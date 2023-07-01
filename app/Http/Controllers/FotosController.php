@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Imagen;
 use App\Models\Cuenta;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ImagenRequest;
+
 
 
 
@@ -18,8 +20,14 @@ class FotosController extends Controller
         return view('imagenes.index',compact(['imagenes','artistas']));
     }
 
+    public function all(){
+        $artistas = Cuenta::where('perfil_id', 2)->orderBy('user')->get(); 
+        $imagenes = Imagen::where('baneada', 1)->orderBy('id')->get();
+        return view('imagenes.all',compact(['imagenes','artistas']));
+    }
+
     public function __construct(){
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth')->except(['index','all']);
     }
 
 
@@ -29,7 +37,7 @@ class FotosController extends Controller
         return view('imagenes.create',compact('imagenes','artistas'));
     }
 
-    public function store(Request $request)
+    public function store(ImagenRequest $request)
     {
         $imagen = new Imagen();
         $cuenta = Auth::user();
@@ -49,7 +57,7 @@ class FotosController extends Controller
     
         $imagen->save();
     
-        return view('home.index');
+        return redirect()->route('imagenes.create');
     }
     
     public function destroy($id){

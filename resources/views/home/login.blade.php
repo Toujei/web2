@@ -7,7 +7,7 @@
   <title>Iniciar sesión</title>
   <style>
     body {
-      background-image: url('images/fotografia2-e1537978531632.jpg');
+      background-image: url('{{asset("images/fotografia2-e1537978531632.jpg")}}');
       background-size: cover;
       background-position: center;
     }
@@ -17,6 +17,26 @@
   </style>
 </head>
 <body>
+  <div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        @if(auth()->check())
+            <span class="navbar-text">Usuario: {{ Auth::user()->user }}</span>
+        @endif
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active text-black" aria-current="page" href="{{ route('home.index') }}">Inicio</a>
+            </li>
+          <ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
   <div class="container">
       <div class="row justify-content-center">
           <div class="col-md-6">

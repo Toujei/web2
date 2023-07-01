@@ -9,6 +9,7 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+       
     </style>
 </head>
 <body>
@@ -61,31 +62,36 @@
     </div>
 
 
-    <div class="container">
-        <div class="col-4">
-                <a href="{{route('imagenes.all')}}" class="btn btn-danger btn-lg mt-3 mb-3 mx-5">Ver por artistas</a>
+    <form action="{{ route('imagenes.all') }}" method="GET">
+        <select id="imagen" name="artista" class="form-control" onchange="this.form.submit()">
+            @foreach($artistas as $artista)
+                <option value="{{ $artista->user }}" @if(request('artista') == $artista->user) selected @endif>{{ $artista->user }}</option>
+            @endforeach
+        </select>
+    </form>
 
-            </div>
+
+    <div class="container">
         <div class="row">
-            @foreach ($artistas as $artista)    
+            @foreach ($artistas as $artista)
+                @if ($artista->user == request('artista'))
                     @foreach ($artista->imagenes as $imagen)
                         @if($imagen->baneada == 0)
                             <div class="col-sm-4 d-flex">
-                            <div class="card flex-fill custom-card">
-                                <img src="{{ asset('storage/' . $imagen->archivo) }}" class="card-img-top" alt="Imagen">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $imagen->titulo }}</h5>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary">Artista: {{$artista->user}}</h6>
+                                <div class="card flex-fill custom-card">
+                                    <img src="{{ asset('storage/' . $imagen->archivo) }}" class="card-img-top" alt="Imagen">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $imagen->titulo }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-body-secondary">Artista: {{$artista->user}}</h6>
+
+                                    </div>
 
                                 </div>
-
                             </div>
-                        </div>
                         @endif
                     @endforeach
+                @endif
             @endforeach
-            
-            
         </div>
     </div>
 

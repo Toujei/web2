@@ -6,7 +6,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
-      background-image: url("images/guns-n-roses-estadio-nacional.jpg");
+      background-image: url('{{asset("images/usuarios-recurrentes.jpg")}}');
       background-size: cover;
 
     }
@@ -31,9 +31,11 @@
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('imagenes.index') }}">Fotos</a>
             </li>
+            @if(Gate::allows('listado'))
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('perfiles.index') }}">Perfiles</a>
             </li>
+            @endif
             @if(auth()->check())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,9 +45,9 @@
                   <li><a class="dropdown-item text-black" href="{{ route('imagenes.create') }}">Tus fotos</a></li>
                   @if(Gate::allows('listado'))
                     <li><a class="dropdown-item text-black" href="{{ route('cuentas.create') }}">Crear cuentas</a></li>
-                    <li><a class="dropdown-item text-black" href="{{ route('cuentas.index') }}">Cuentas</a></li>
                     <li><a class="dropdown-item text-black" href="{{ route('imagenban.index') }}">Banear</a></li>
                   @endif
+                  <li><a class="dropdown-item text-black" href="{{ route('cuentas.index') }}">Cuentas</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -60,9 +62,9 @@
   </div>
 
 <div class="container">
-  <h1>Tabla de 3 columnas</h1>
 
-  <table class="table table-bordered table-striped table-hover table-light">
+
+  <table class="table table-bordered table-striped table-hover table-light mt-5">
     <thead>
       <tr>
         <th>Usuario</th>
